@@ -20,7 +20,9 @@ namespace Kindergarten
 
         private void admin_Load(object sender, EventArgs e)
         {
+            func.condb();
             func.connection.Open();
+
             using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT * FROM accounts", func.connection))
             {
                 // 3

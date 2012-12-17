@@ -13,7 +13,7 @@ namespace Kindergarten
  
         public static void condb()
         {
-            func.connection = new MySqlConnection("SERVER=localhost;DATABASE=kindergarten;UID=root;PASSWORD=;");
+            func.connection = new MySqlConnection("SERVER=localhost;DATABASE=kindergarten;UID=root;PASSWORD=paddole;");
         }
     }
 }
