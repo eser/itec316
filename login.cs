@@ -25,10 +25,11 @@ namespace Kindergarten
         private void button1_Click(object sender, EventArgs e)
         {
             string _password = null;
+            string _accounttype = null;
 
             using (MySqlCommand _cmd = func.connection.CreateCommand())
             {
-                _cmd.CommandText = "SELECT * FROM accounts WHERE accounttype='teacher' AND username=@username";
+                _cmd.CommandText = "SELECT * FROM accounts WHERE username=@username";
                 _cmd.Parameters.AddWithValue("username", textBox1.Text);
 
                 using (MySqlDataReader _reader = _cmd.ExecuteReader(CommandBehavior.SingleRow))
@@ -36,6 +37,7 @@ namespace Kindergarten
                     if (_reader.Read())
                     {
                         _password = (string)_reader["password"];
+                        _accounttype = (string)_reader["accounttype"];
                     }
                     else
                     {
@@ -57,8 +59,21 @@ namespace Kindergarten
                 return;
             }
 
-            func.adminForm = new admin();
-            func.adminForm.Show();
+            switch (_accounttype)
+            {
+                case "teacher":
+                    func.adminForm = new admin();
+                    func.adminForm.Show();
+                    break;
+                case "parent":
+                    func.parentForm = new parent();
+                    func.parentForm.Show();
+                    break;
+                case "student":
+                    func.studentForm = new student();
+                    func.studentForm.Show();
+                    break;
+            }
         }
     }
 }

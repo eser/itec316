@@ -7,6 +7,8 @@ namespace Kindergarten
         public static MySqlConnection connection;
         public static login loginForm;
         public static admin adminForm;
+        public static parent parentForm;
+        public static student studentForm;
 
         public static void start()
         {
@@ -15,6 +17,8 @@ namespace Kindergarten
 
             func.loginForm = new login();
             // func.adminForm = new admin();
+            // func.parentForm = new parent();
+            // func.studentForm = new student();
         }
     }
 }
