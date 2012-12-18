@@ -34,13 +34,13 @@ namespace Kindergarten
         private void button1_Click(object sender, EventArgs e)
         {
             //TODO: Login implement database
-            if (textBox1.Text == "admin")
-            {
+          //  if (textBox1.Text == "admin")
+          //  {
 
-                this.Hide();
+             //   this.Hide();
                 new admin().Show();
                 
-            }
+           // }
         }
     }
 }

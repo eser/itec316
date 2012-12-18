@@ -30,6 +30,21 @@ namespace Kindergarten
                 a.Fill(t);
                 teachergrid.DataSource = t;
             }
+            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,birthdate,classid,level FROM accounts where accounttype='student'", func.connection))
+            {
+
+                DataTable t = new DataTable();
+                a.Fill(t);
+                studentgrid.DataSource = t;
+            }
+            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,telephone,address FROM accounts where accounttype='parent'", func.connection))
+            {
+
+                DataTable t = new DataTable();
+                a.Fill(t);
+                parentgrid.DataSource = t;
+            }
+
             func.connection.Close();
 
         }
@@ -44,7 +59,7 @@ namespace Kindergarten
             this.Close();
             login.instance.Show();
         }
-
+        //Teacher
         private void button1_Click(object sender, EventArgs e)
         {
             func.condb();
@@ -82,6 +97,64 @@ namespace Kindergarten
             func.connection.Close();
         }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+
+        //student
+        private void button4_Click(object sender, EventArgs e)
+        {
+            func.condb();
+            func.connection.Open();
+            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,birthdate,classid,level FROM accounts where accounttype='student'", func.connection))
+            {
+
+                DataTable t = new DataTable();
+                a.Fill(t);
+                studentgrid.DataSource = t;
+            }
+            func.connection.Close();
+
+        }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            func.condb();
+            func.connection.Open();
+            MySqlCommand comm = new MySqlCommand("delete from accounts where accounttype='student'", func.connection);
+           // comm.ExecuteNonQuery();
+            DataTable t = new DataTable();
+            //a.Fill(t);
+            //Object a = teachergrid.Rows[0]["0"];
+            for (int i = 0; i < studentgrid.Rows.Count - 1; i++)
+            {
+
+                comm.CommandText = "INSERT INTO accounts (accounttype,fullname,email,username,password,birthdate,level,classid) VALUES ('student', '"
+                 + studentgrid.Rows[i].Cells["fullname"].Value.ToString() + "','"
+                 + studentgrid.Rows[i].Cells["email"].Value.ToString() + "','"
+                 + studentgrid.Rows[i].Cells["username"].Value.ToString() + "','12345','"
+                 + studentgrid.Rows[i].Cells["birthdate"].Value + "','"
+                 + studentgrid.Rows[i].Cells["level"].Value + "','"
+                 + studentgrid.Rows[i].Cells["classid"].Value + "');";
+                System.Windows.Forms.MessageBox.Show(comm.CommandText);
+             //   comm.ExecuteNonQuery();
+            }
+            func.connection.Close();
+
+        }
+
+
+        //parent
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
 
 
     }
