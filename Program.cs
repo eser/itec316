@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Kindergarten
@@ -16,7 +13,9 @@ namespace Kindergarten
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new login());
+
+            func.start();
+            Application.Run(func.loginForm);
         }
     }
 }

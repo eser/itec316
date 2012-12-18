@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
 
 namespace Kindergarten
@@ -21,8 +15,6 @@ namespace Kindergarten
 
         private void admin_Load(object sender, EventArgs e)
         {
-            func.condb();
-            func.connection.Open();
             using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,classid,level FROM accounts where accounttype='teacher'", func.connection))
             {
 
@@ -32,7 +24,6 @@ namespace Kindergarten
             }
             using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,birthdate,classid,level FROM accounts where accounttype='student'", func.connection))
             {
-
                 DataTable t = new DataTable();
                 a.Fill(t);
                 studentgrid.DataSource = t;
@@ -44,9 +35,6 @@ namespace Kindergarten
                 a.Fill(t);
                 parentgrid.DataSource = t;
             }
-
-            func.connection.Close();
-
         }
 
         private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -57,13 +45,11 @@ namespace Kindergarten
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
-            login.instance.Show();
         }
+
         //Teacher
         private void button1_Click(object sender, EventArgs e)
         {
-            func.condb();
-            func.connection.Open();
             using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,classid,level FROM accounts where accounttype='teacher'", func.connection))
             {
 
@@ -71,30 +57,26 @@ namespace Kindergarten
                 a.Fill(t);
                 teachergrid.DataSource = t;
             }
-            func.connection.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            func.condb();
-            func.connection.Open();
-                MySqlCommand comm = new MySqlCommand("delete from accounts where accounttype='teacher'",func.connection);
+            MySqlCommand comm = new MySqlCommand("delete from accounts where accounttype='teacher'", func.connection);
+            comm.ExecuteNonQuery();
+            DataTable t = new DataTable();
+            //a.Fill(t);
+            //Object a = teachergrid.Rows[0]["0"];
+            for (int i = 0; i < teachergrid.Rows.Count - 1; i++)
+            {
+
+                comm.CommandText = "INSERT INTO accounts (accounttype, fullname, email, username, password, level,classid) VALUES ('teacher', '"
+                 + teachergrid.Rows[i].Cells["fullname"].Value.ToString() + "','"
+                 + teachergrid.Rows[i].Cells["email"].Value.ToString() + "','"
+                 + teachergrid.Rows[i].Cells["username"].Value.ToString() + "','12345','"
+                 + teachergrid.Rows[i].Cells["level"].Value + "','"
+                 + teachergrid.Rows[i].Cells["classid"].Value + "');";
                 comm.ExecuteNonQuery();
-                DataTable t = new DataTable();
-                //a.Fill(t);
-                //Object a = teachergrid.Rows[0]["0"];
-                for (int i = 0; i < teachergrid.Rows.Count-1; i++)
-                {
-                   
-                    comm.CommandText = "INSERT INTO accounts (accounttype, fullname, email, username, password, level,classid) VALUES ('teacher', '"
-                     + teachergrid.Rows[i].Cells["fullname"].Value.ToString() + "','" 
-                     + teachergrid.Rows[i].Cells["email"].Value.ToString() + "','" 
-                     + teachergrid.Rows[i].Cells["username"].Value.ToString() + "','12345','" 
-                     + teachergrid.Rows[i].Cells["level"].Value + "','" 
-                     + teachergrid.Rows[i].Cells["classid"].Value + "');";
-                    comm.ExecuteNonQuery();
-                }
-            func.connection.Close();
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -106,8 +88,6 @@ namespace Kindergarten
         //student
         private void button4_Click(object sender, EventArgs e)
         {
-            func.condb();
-            func.connection.Open();
             using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,birthdate,classid,level FROM accounts where accounttype='student'", func.connection))
             {
 
@@ -115,15 +95,13 @@ namespace Kindergarten
                 a.Fill(t);
                 studentgrid.DataSource = t;
             }
-            func.connection.Close();
 
         }
+
         private void button3_Click(object sender, EventArgs e)
         {
-            func.condb();
-            func.connection.Open();
             MySqlCommand comm = new MySqlCommand("delete from accounts where accounttype='student'", func.connection);
-           // comm.ExecuteNonQuery();
+            // comm.ExecuteNonQuery();
             DataTable t = new DataTable();
             //a.Fill(t);
             //Object a = teachergrid.Rows[0]["0"];
@@ -138,10 +116,8 @@ namespace Kindergarten
                  + studentgrid.Rows[i].Cells["level"].Value + "','"
                  + studentgrid.Rows[i].Cells["classid"].Value + "');";
                 System.Windows.Forms.MessageBox.Show(comm.CommandText);
-             //   comm.ExecuteNonQuery();
+                //   comm.ExecuteNonQuery();
             }
-            func.connection.Close();
-
         }
 
 
@@ -156,6 +132,14 @@ namespace Kindergarten
 
         }
 
+        private void admin_Shown(object sender, EventArgs e)
+        {
+            func.loginForm.Hide();
+        }
 
+        private void admin_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            func.loginForm.Show();
+        }
     }
 }
