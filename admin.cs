@@ -15,34 +15,36 @@ namespace Kindergarten
 
         private void admin_Load(object sender, EventArgs e)
         {
+            this.listView1.Items[0].Selected = true;
+
             using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,classid,level FROM accounts where accounttype='teacher'", func.connection))
             {
-
                 DataTable t = new DataTable();
                 a.Fill(t);
                 teachergrid.DataSource = t;
             }
+
             using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,birthdate,classid,level FROM accounts where accounttype='student'", func.connection))
             {
                 DataTable t = new DataTable();
                 a.Fill(t);
                 studentgrid.DataSource = t;
             }
+
             using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,telephone,address FROM accounts where accounttype='parent'", func.connection))
             {
-
                 DataTable t = new DataTable();
                 a.Fill(t);
                 parentgrid.DataSource = t;
             }
         }
 
-        private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void about_Click(object sender, EventArgs e)
         {
-
+            func.about(this);
         }
 
-        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void logout_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -52,7 +54,6 @@ namespace Kindergarten
         {
             using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,classid,level FROM accounts where accounttype='teacher'", func.connection))
             {
-
                 DataTable t = new DataTable();
                 a.Fill(t);
                 teachergrid.DataSource = t;
@@ -140,6 +141,14 @@ namespace Kindergarten
         private void admin_FormClosed(object sender, FormClosedEventArgs e)
         {
             func.loginForm.Show();
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.listView1.SelectedItems.Count > 0)
+            {
+                this.tabControl1.SelectedIndex = this.listView1.SelectedItems[0].Index;
+            }
         }
     }
 }

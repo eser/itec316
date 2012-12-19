@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using System.Windows.Forms;
 
 namespace Kindergarten
 {
@@ -19,6 +20,11 @@ namespace Kindergarten
             // func.adminForm = new admin();
             // func.parentForm = new parent();
             // func.studentForm = new student();
+        }
+
+        public static void about(Form container)
+        {
+            MessageBox.Show(container, "about form");
         }
     }
 }

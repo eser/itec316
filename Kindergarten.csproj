@@ -79,6 +79,9 @@
       <DependentUpon>admin.cs</DependentUpon>
     </Compile>
     <Compile Include="Class1.cs" />
+    <Compile Include="CustomTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="login.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -34,9 +34,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(716, 484);
+            this.ClientSize = new System.Drawing.Size(789, 486);
             this.Name = "parent";
-            this.Text = "parent";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Parent";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.parent_FormClosed);
             this.Shown += new System.EventHandler(this.parent_Shown);
             this.ResumeLayout(false);
