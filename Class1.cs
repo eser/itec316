@@ -1,10 +1,14 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace Kindergarten
 {
     static class func
     {
+        [DllImport("winmm.dll", EntryPoint = "mciSendStringA", CharSet = CharSet.Ansi, SetLastError = true, ExactSpelling = true)]
+        public static extern int mciSendString(string lpstrCommand, string lpstrReturnString, int uReturnLength, int hwndCallback);
+
         public static MySqlConnection connection;
         public static login loginForm;
         public static admin adminForm;
@@ -13,7 +17,7 @@ namespace Kindergarten
 
         public static void start()
         {
-            func.connection = new MySqlConnection("SERVER=localhost;DATABASE=kindergarten;UID=root;PASSWORD=paddole;");
+            func.connection = new MySqlConnection("SERVER=localhost;DATABASE=kindergarten;UID=root;PASSWORD=;");
             func.connection.Open();
 
             func.loginForm = new login();

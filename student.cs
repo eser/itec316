@@ -49,5 +49,17 @@ namespace Kindergarten
                 this.tabControl1.SelectedIndex = this.listView1.SelectedItems[0].Index;
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            func.mciSendString("open new Type waveaudio Alias recsound", "", 0, 0);
+            func.mciSendString("record recsound", "", 0, 0);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            func.mciSendString("save recsound c:\\itec316\\result.wav", "", 0, 0);
+            func.mciSendString("close recsound ", "", 0, 0);
+        }
     }
 }
