@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
+using MySql.Data.MySqlClient;
+
 
 namespace Kindergarten
 {
@@ -30,6 +33,23 @@ namespace Kindergarten
         private void student_Load(object sender, EventArgs e)
         {
             this.listView1.Items[0].Selected = true;
+            label1.Text = "Last 3 Scores:";
+            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT recorddate,score FROM gameresults where stdid='" 
+                + func.userid + "' and gameid=3 ORDER BY recorddate DESC LIMIT 0 , 3", func.connection))
+            {
+                DataTable t = new DataTable();
+                a.Fill(t);
+                resultgrid.DataSource = t;
+            }
+            label2.Text = "Last 3 Scores:";
+            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT recorddate,score,level FROM gameresults where stdid='"
+                + func.userid + "' and gameid=1 ORDER BY recorddate DESC LIMIT 0 , 3", func.connection))
+            {
+                DataTable t = new DataTable();
+                a.Fill(t);
+                hanoigrid.DataSource = t;
+            }
+
         }
 
         private void about_Click(object sender, EventArgs e)
@@ -61,5 +81,67 @@ namespace Kindergarten
             func.mciSendString("save recsound c:\\itec316\\result.wav", "", 0, 0);
             func.mciSendString("close recsound ", "", 0, 0);
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Process.Start("Snake.exe ",func.userid + " " + "3");
+            
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            label1.Text = "Last 3 Scores:";
+            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT recorddate,score FROM gameresults where stdid='"
+                + func.userid + "' and gameid=3 ORDER BY recorddate DESC LIMIT 0 , 3", func.connection))
+            {
+
+                DataTable t = new DataTable();
+                a.Fill(t);
+                resultgrid.DataSource = t;
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            label1.Text = "All Scores:";
+            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT recorddate,score FROM gameresults where stdid='"
+    + func.userid + "' and gameid=3 ORDER BY recorddate DESC", func.connection))
+            {
+                DataTable t = new DataTable();
+                a.Fill(t);
+                resultgrid.DataSource = t;
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            Process.Start("toh.exe ", func.userid + " " + "1");
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            label2.Text = "All Scores:";
+            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT recorddate,score,level FROM gameresults where stdid='"
+    + func.userid + "' and gameid=1 ORDER BY recorddate DESC", func.connection))
+            {
+                DataTable t = new DataTable();
+                a.Fill(t);
+                hanoigrid.DataSource = t;
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            label2.Text = "Last 3 Scores:";
+            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT recorddate,score,level FROM gameresults where stdid='"
+    + func.userid + "' and gameid=1 ORDER BY recorddate DESC LIMIT 0 , 3", func.connection))
+            {
+                DataTable t = new DataTable();
+                a.Fill(t);
+                hanoigrid.DataSource = t;
+            }
+        }
+
+
     }
 }

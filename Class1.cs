@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace Kindergarten
 {
-    static class func
+    public static class func
     {
         [DllImport("winmm.dll", EntryPoint = "mciSendStringA", CharSet = CharSet.Ansi, SetLastError = true, ExactSpelling = true)]
         public static extern int mciSendString(string lpstrCommand, string lpstrReturnString, int uReturnLength, int hwndCallback);
@@ -14,12 +14,18 @@ namespace Kindergarten
         public static admin adminForm;
         public static parent parentForm;
         public static student studentForm;
+        public static string userid;
 
-        public static void start()
+        public static void conn()
         {
             func.connection = new MySqlConnection("SERVER=localhost;DATABASE=kindergarten;UID=root;PASSWORD=;");
             func.connection.Open();
 
+        }
+
+        public static void start()
+        {
+            conn();
             func.loginForm = new login();
             // func.adminForm = new admin();
             // func.parentForm = new parent();

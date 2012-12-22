@@ -36,6 +36,7 @@ namespace Kindergarten
                 {
                     if (_reader.Read())
                     {
+                        func.userid = (string)_reader["username"];
                         _password = (string)_reader["password"];
                         _accounttype = (string)_reader["accounttype"];
                     }
@@ -50,7 +51,7 @@ namespace Kindergarten
                 }
             }
 
-            //TODO: Login implement database
+            
             if (_password != this.textBox2.Text)
             {
                 MessageBox.Show("password error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
