@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 23, 2012 at 06:30 PM
+-- Generation Time: Dec 23, 2012 at 08:07 PM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.3.13
 
@@ -40,20 +40,20 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `parent_username` varchar(50) DEFAULT NULL,
   `classid` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`accountid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
 
 --
 -- Dumping data for table `accounts`
 --
 
 INSERT INTO `accounts` (`accountid`, `accounttype`, `email`, `fullname`, `username`, `password`, `address`, `telephone`, `birthdate`, `level`, `parent_username`, `classid`) VALUES
-(2, 'parent', 'parent1@kindergarten.org', 'Parent One', 'parent1', '12345', 'Address One', '555-5555', NULL, 0, NULL, NULL),
 (8, 'teacher', 'teacher1@kindergarten.org', 'Teacher One', 'teacher1', '12345', NULL, NULL, NULL, 0, NULL, 1),
 (9, 'teacher', 'teacher2@kindergarten.org', 'Teacher Two', 'teacher2', '12345', NULL, NULL, NULL, 0, NULL, 1),
 (32, 'student', 'std1@kg.com', 'Student1', 'student1', '12345', NULL, NULL, '2012-12-03 00:00:00', 1, 'parent1', 1),
 (33, 'student', 'std2@kg.com', 'Student two', 'student2', '12345', NULL, NULL, '2012-10-22 00:00:00', 1, 'parent1', 1),
 (34, 'student', 'std3@kg.com', 'Student three', 'student3', '12345', NULL, NULL, '2012-08-20 00:00:00', 1, 'parent2', 1),
-(35, 'student', 'std4@kg.com', 'student four', 'student4', '12345', NULL, NULL, '1984-12-10 00:00:00', 2, 'parent3', 1);
+(35, 'student', 'std4@kg.com', 'student four', 'student4', '12345', NULL, NULL, '1984-12-10 00:00:00', 2, 'parent3', 1),
+(36, 'parent', 'parent1@kindergarten.org', 'Parent One', 'parent1', '123456', 'Address One', '555-5555', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -147,11 +147,23 @@ INSERT INTO `games` (`gameid`, `name`, `gametype`, `level`) VALUES
 
 CREATE TABLE IF NOT EXISTS `messages` (
   `messageid` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `senderaccount` int(10) unsigned NOT NULL,
-  `receiveraccount` int(10) unsigned NOT NULL,
+  `senderaccount` varchar(20) NOT NULL,
+  `receiveraccount` varchar(20) NOT NULL,
   `text` text NOT NULL,
+  `messagedate` date NOT NULL,
   PRIMARY KEY (`messageid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`messageid`, `senderaccount`, `receiveraccount`, `text`, `messagedate`) VALUES
+(2, 'teacher1', 'parent1', 'Dear parent\r\nYour student must work harder\r\n', '2012-12-17'),
+(3, 'techer1', 'parent1', 'Naber len?', '2012-12-04'),
+(4, 'teacher1', 'parent1', 'Sevgili parent\nÖgrenciniz süper inek benden söylemesi\n\n? ? ü ? ç ö', '2012-12-23'),
+(5, 'teacher1', 'parent1', 'merhaba parent\n\nBeni özledin mi.. ;)', '2012-12-23'),
+(6, 'teacher1', 'parent1', 'Türkçe karakter denemesi\n\ni g ü s ç ö\nI G Ü S Ç Ö', '2012-12-23');
 
 -- --------------------------------------------------------
 

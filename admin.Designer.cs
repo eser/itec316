@@ -35,6 +35,7 @@
             System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Student", 0);
             System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Parent", 0);
             System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Edit Classes", 1);
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Messaging", 2);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(admin));
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.listView1 = new System.Windows.Forms.ListView();
@@ -57,6 +58,11 @@
             this.button6 = new System.Windows.Forms.Button();
             this.parentgrid = new System.Windows.Forms.DataGridView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.button7 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -66,6 +72,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.studentgrid)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.parentgrid)).BeginInit();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // listView1
@@ -87,16 +94,18 @@
             listViewItem2.Group = listViewGroup1;
             listViewItem3.Group = listViewGroup1;
             listViewItem4.Group = listViewGroup2;
+            listViewItem5.Group = listViewGroup1;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1,
             listViewItem2,
             listViewItem3,
-            listViewItem4});
+            listViewItem4,
+            listViewItem5});
             this.listView1.LargeImageList = this.ımageList1;
             this.listView1.Location = new System.Drawing.Point(12, 34);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(110, 436);
+            this.listView1.Size = new System.Drawing.Size(114, 436);
             this.listView1.TabIndex = 6;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
@@ -111,6 +120,7 @@
             this.ımageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.ımageList1.Images.SetKeyName(0, "user.png");
             this.ımageList1.Images.SetKeyName(1, "house.png");
+            this.ımageList1.Images.SetKeyName(2, "comment_bubble.png");
             // 
             // toolStrip1
             // 
@@ -154,6 +164,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Location = new System.Drawing.Point(128, 34);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
@@ -169,7 +180,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(641, 411);
+            this.tabPage1.Size = new System.Drawing.Size(816, 411);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Teacher";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -264,7 +275,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(641, 411);
+            this.tabPage3.Size = new System.Drawing.Size(816, 411);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Parent";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -308,10 +319,64 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 25);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(641, 411);
+            this.tabPage4.Size = new System.Drawing.Size(816, 411);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Classes";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.button7);
+            this.tabPage5.Controls.Add(this.label1);
+            this.tabPage5.Controls.Add(this.comboBox1);
+            this.tabPage5.Controls.Add(this.richTextBox1);
+            this.tabPage5.Location = new System.Drawing.Point(4, 25);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(816, 411);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Messaging";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button7.Location = new System.Drawing.Point(738, 368);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(72, 40);
+            this.button7.TabIndex = 3;
+            this.button7.Text = "Send Message";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 28);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(74, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Select Parent:";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(86, 25);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 1;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox1.Location = new System.Drawing.Point(9, 52);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(801, 289);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.Text = "";
             // 
             // admin
             // 
@@ -337,6 +402,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.studentgrid)).EndInit();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.parentgrid)).EndInit();
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -365,5 +432,10 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

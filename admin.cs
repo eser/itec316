@@ -17,6 +17,15 @@ namespace Kindergarten
         {
             this.listView1.Items[0].Selected = true;
 
+            MySqlCommand cmd = new MySqlCommand("SELECT username FROM accounts where accounttype='parent'", func.connection);
+            MySqlDataReader dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                comboBox1.Items.Add(dataReader["username"]);
+            }
+            dataReader.Close();
+            comboBox1.SelectedIndex = 0;
+
             using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,classid,level,password FROM accounts where accounttype='teacher'", func.connection))
             {
                 DataTable t = new DataTable();
@@ -177,6 +186,17 @@ namespace Kindergarten
             {
                 this.tabControl1.SelectedIndex = this.listView1.SelectedItems[0].Index;
             }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            
+            MySqlCommand cmd = new MySqlCommand("INSERT INTO messages (senderaccount, receiveraccount, text, messagedate) VALUES ('"
+            + func.userid + "','"
+            + comboBox1.SelectedItem.ToString() + "','"
+            + richTextBox1.Text.ToString() + "',now())", func.connection);
+            cmd.ExecuteNonQuery();
+            System.Windows.Forms.MessageBox.Show("Message Send.");
         }
     }
 }

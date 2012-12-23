@@ -30,11 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(parent));
-            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Information", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("Browse", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Grades", 1);
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Messaging", 2);
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Videos", 0);
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Information", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Browse", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Grades", 1);
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Messaging", 2);
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Videos", 0);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -55,12 +55,18 @@
             this.label2 = new System.Windows.Forms.Label();
             this.hanoigrid = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.snakegrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hanoigrid)).BeginInit();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -101,22 +107,22 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
-            listViewGroup3.Header = "Information";
-            listViewGroup3.Name = "listViewGroup1";
-            listViewGroup4.Header = "Browse";
-            listViewGroup4.Name = "listViewGroup2";
+            listViewGroup1.Header = "Information";
+            listViewGroup1.Name = "listViewGroup1";
+            listViewGroup2.Header = "Browse";
+            listViewGroup2.Name = "listViewGroup2";
             this.listView1.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup3,
-            listViewGroup4});
+            listViewGroup1,
+            listViewGroup2});
             this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listView1.HideSelection = false;
-            listViewItem4.Group = listViewGroup3;
-            listViewItem5.Group = listViewGroup3;
-            listViewItem6.Group = listViewGroup4;
+            listViewItem1.Group = listViewGroup1;
+            listViewItem2.Group = listViewGroup1;
+            listViewItem3.Group = listViewGroup2;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem4,
-            listViewItem5,
-            listViewItem6});
+            listViewItem1,
+            listViewItem2,
+            listViewItem3});
             this.listView1.LargeImageList = this.ımageList1;
             this.listView1.Location = new System.Drawing.Point(12, 40);
             this.listView1.MultiSelect = false;
@@ -177,12 +183,12 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(250, 294);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 20;
-            this.comboBox1.Text = "Select Student";
             // 
             // label4
             // 
@@ -298,6 +304,11 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button5);
+            this.tabPage2.Controls.Add(this.button4);
+            this.tabPage2.Controls.Add(this.richTextBox1);
+            this.tabPage2.Controls.Add(this.comboBox2);
+            this.tabPage2.Controls.Add(this.button3);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -305,6 +316,55 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Messaging";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(133, 6);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(128, 21);
+            this.button5.TabIndex = 5;
+            this.button5.Text = "Show Message";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(395, 232);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 39);
+            this.button4.TabIndex = 4;
+            this.button4.Text = "Delete Message";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(6, 33);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(548, 193);
+            this.richTextBox1.TabIndex = 3;
+            this.richTextBox1.Text = "";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(6, 6);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 21);
+            this.comboBox2.Sorted = true;
+            this.comboBox2.TabIndex = 2;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(479, 232);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 39);
+            this.button3.TabIndex = 1;
+            this.button3.Text = "Get Messages";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // tabPage3
             // 
@@ -337,6 +397,7 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.snakegrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hanoigrid)).EndInit();
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -365,5 +426,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView hanoigrid;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button5;
     }
 }
