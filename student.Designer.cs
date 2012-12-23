@@ -50,6 +50,7 @@
             this.hanoigrid = new System.Windows.Forms.DataGridView();
             this.button8 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -58,7 +59,6 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -211,6 +211,7 @@
             this.label2.Size = new System.Drawing.Size(42, 13);
             this.label2.TabIndex = 7;
             this.label2.Text = "Results";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // hanoigrid
             // 
@@ -229,6 +230,7 @@
             this.hanoigrid.ShowRowErrors = false;
             this.hanoigrid.Size = new System.Drawing.Size(284, 243);
             this.hanoigrid.TabIndex = 6;
+            this.hanoigrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.hanoigrid_CellContentClick);
             // 
             // button8
             // 
@@ -255,6 +257,15 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Fun Game";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(296, 38);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(257, 182);
+            this.label4.TabIndex = 11;
+            this.label4.Text = resources.GetString("label4.Text");
             // 
             // button5
             // 
@@ -344,15 +355,6 @@
             this.button1.Text = "Record";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(296, 38);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(257, 182);
-            this.label4.TabIndex = 11;
-            this.label4.Text = resources.GetString("label4.Text");
             // 
             // student
             // 

@@ -1,26 +1,32 @@
-/*
-SQLyog Ultimate v9.20 
-MySQL - 5.5.24 : Database - kindergarten
-*********************************************************************
-*/
+-- phpMyAdmin SQL Dump
+-- version 3.5.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Dec 23, 2012 at 06:30 PM
+-- Server version: 5.5.24-log
+-- PHP Version: 5.3.13
 
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
-/*!40101 SET SQL_MODE=''*/;
+--
+-- Database: `kindergarten`
+--
 
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`kindergarten` /*!40100 DEFAULT CHARACTER SET latin1 */;
+-- --------------------------------------------------------
 
-USE `kindergarten`;
+--
+-- Table structure for table `accounts`
+--
 
-/*Table structure for table `accounts` */
-
-DROP TABLE IF EXISTS `accounts`;
-
-CREATE TABLE `accounts` (
+CREATE TABLE IF NOT EXISTS `accounts` (
   `accountid` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `accounttype` enum('student','parent','teacher') DEFAULT NULL,
   `email` varchar(255) NOT NULL,
@@ -31,89 +37,137 @@ CREATE TABLE `accounts` (
   `telephone` varchar(255) DEFAULT NULL,
   `birthdate` datetime DEFAULT NULL,
   `level` int(10) unsigned DEFAULT NULL,
-  `parentaccountid` int(10) unsigned DEFAULT NULL,
+  `parent_username` varchar(50) DEFAULT NULL,
   `classid` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`accountid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
 
-/*Data for the table `accounts` */
+--
+-- Dumping data for table `accounts`
+--
 
-insert  into `accounts`(`accountid`,`accounttype`,`email`,`fullname`,`username`,`password`,`address`,`telephone`,`birthdate`,`level`,`parentaccountid`,`classid`) values (1,'teacher','teacher1@kindergarten.org','Teacher One','teacher1','12345',NULL,NULL,NULL,0,NULL,1),(2,'parent','parent1@kindergarten.org','Parent One','parent1','12345','Address One','555-5555',NULL,0,NULL,NULL),(3,'student','student1@kindergarten.org','Student One','student1','12345',NULL,NULL,'2012-12-18 00:56:49',5,2,1);
+INSERT INTO `accounts` (`accountid`, `accounttype`, `email`, `fullname`, `username`, `password`, `address`, `telephone`, `birthdate`, `level`, `parent_username`, `classid`) VALUES
+(2, 'parent', 'parent1@kindergarten.org', 'Parent One', 'parent1', '12345', 'Address One', '555-5555', NULL, 0, NULL, NULL),
+(8, 'teacher', 'teacher1@kindergarten.org', 'Teacher One', 'teacher1', '12345', NULL, NULL, NULL, 0, NULL, 1),
+(9, 'teacher', 'teacher2@kindergarten.org', 'Teacher Two', 'teacher2', '12345', NULL, NULL, NULL, 0, NULL, 1),
+(32, 'student', 'std1@kg.com', 'Student1', 'student1', '12345', NULL, NULL, '2012-12-03 00:00:00', 1, 'parent1', 1),
+(33, 'student', 'std2@kg.com', 'Student two', 'student2', '12345', NULL, NULL, '2012-10-22 00:00:00', 1, 'parent1', 1),
+(34, 'student', 'std3@kg.com', 'Student three', 'student3', '12345', NULL, NULL, '2012-08-20 00:00:00', 1, 'parent2', 1),
+(35, 'student', 'std4@kg.com', 'student four', 'student4', '12345', NULL, NULL, '1984-12-10 00:00:00', 2, 'parent3', 1);
 
-/*Table structure for table `classes` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `classes`;
+--
+-- Table structure for table `classes`
+--
 
-CREATE TABLE `classes` (
+CREATE TABLE IF NOT EXISTS `classes` (
   `classid` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`classid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
-/*Data for the table `classes` */
+--
+-- Dumping data for table `classes`
+--
 
-insert  into `classes`(`classid`,`name`) values (1,'Class 1'),(2,'Class 2');
+INSERT INTO `classes` (`classid`, `name`) VALUES
+(1, 'Class 1'),
+(2, 'Class 2');
 
-/*Table structure for table `gameresults` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `gameresults`;
+--
+-- Table structure for table `gameresults`
+--
 
-CREATE TABLE `gameresults` (
-  `gameid` int(10) unsigned NOT NULL,
-  `studentaccountid` int(10) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `gameresults` (
+  `gameid` int(10) NOT NULL,
+  `stdid` varchar(50) NOT NULL,
   `recorddate` datetime NOT NULL,
   `score` int(11) NOT NULL,
-  PRIMARY KEY (`gameid`,`studentaccountid`)
+  `level` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `gameresults` */
+--
+-- Dumping data for table `gameresults`
+--
 
-/*Table structure for table `games` */
+INSERT INTO `gameresults` (`gameid`, `stdid`, `recorddate`, `score`, `level`) VALUES
+(3, 'student1', '2012-12-23 00:03:55', 10, 0),
+(3, 'student1', '2012-12-23 00:19:59', 0, 0),
+(3, 'student1', '2012-12-23 00:33:27', 0, 0),
+(3, 'student1', '2012-12-23 00:33:36', 20, 0),
+(3, 'student1', '2012-12-23 00:36:10', 20, 0),
+(3, 'student1', '2012-12-23 00:47:21', 0, 0),
+(1, 'student1', '2012-12-23 01:17:05', 11, 3),
+(1, 'student1', '2012-12-23 01:23:48', 13, 3),
+(1, 'student1', '2012-12-23 01:23:55', 15, 3),
+(1, 'student1', '2012-12-23 01:24:13', 15, 3),
+(1, 'student1', '2012-12-23 01:24:29', 13, 3),
+(1, 'student1', '2012-12-23 01:24:49', 16, 3),
+(1, 'student1', '2012-12-23 01:39:48', 13, 3),
+(3, 'student1', '2012-12-23 01:40:58', 0, 0),
+(3, 'student1', '2012-12-23 01:41:18', 0, 0),
+(3, 'student1', '2012-12-23 01:41:59', 0, 0),
+(1, 'student1', '2012-12-23 15:51:22', 7, 3),
+(3, 'student1', '2012-12-23 15:52:11', 20, 0),
+(3, 'student1', '2012-12-23 16:53:07', 10, 2);
 
-DROP TABLE IF EXISTS `games`;
+-- --------------------------------------------------------
 
-CREATE TABLE `games` (
+--
+-- Table structure for table `games`
+--
+
+CREATE TABLE IF NOT EXISTS `games` (
   `gameid` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `gametype` enum('learning','fun') DEFAULT NULL,
   `level` int(10) unsigned NOT NULL,
   PRIMARY KEY (`gameid`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
-/*Data for the table `games` */
+--
+-- Dumping data for table `games`
+--
 
-insert  into `games`(`gameid`,`name`,`gametype`,`level`) values (1,'Learning 1','learning',1),(2,'Learning 2','learning',2),(3,'Fun 1','fun',0),(4,'Fun 2','fun',0),(5,'Fun 3','fun',0);
+INSERT INTO `games` (`gameid`, `name`, `gametype`, `level`) VALUES
+(1, 'Learning 1', 'learning', 1),
+(2, 'Learning 2', 'learning', 2),
+(3, 'Fun 1', 'fun', 0),
+(4, 'Fun 2', 'fun', 0),
+(5, 'Fun 3', 'fun', 0);
 
-/*Table structure for table `messages` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `messages`;
+--
+-- Table structure for table `messages`
+--
 
-CREATE TABLE `messages` (
+CREATE TABLE IF NOT EXISTS `messages` (
   `messageid` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `senderaccount` int(10) unsigned NOT NULL,
   `receiveraccount` int(10) unsigned NOT NULL,
   `text` text NOT NULL,
   PRIMARY KEY (`messageid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
-/*Data for the table `messages` */
+-- --------------------------------------------------------
 
-/*Table structure for table `videos` */
+--
+-- Table structure for table `videos`
+--
 
-DROP TABLE IF EXISTS `videos`;
-
-CREATE TABLE `videos` (
+CREATE TABLE IF NOT EXISTS `videos` (
   `videoid` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `datecreated` datetime NOT NULL,
   `createdby` int(10) unsigned NOT NULL,
   `duration` decimal(3,2) NOT NULL,
   `title` varchar(255) NOT NULL,
   PRIMARY KEY (`videoid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
-/*Data for the table `videos` */
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

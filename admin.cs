@@ -24,17 +24,18 @@ namespace Kindergarten
                 teachergrid.DataSource = t;
             }
 
-            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,birthdate,classid,level FROM accounts where accounttype='student'", func.connection))
+            using (MySqlDataAdapter b = new MySqlDataAdapter("SELECT fullname,email,username,birthdate,classid,level,parent_username FROM accounts where accounttype='student'", func.connection))
             {
                 DataTable t = new DataTable();
-                a.Fill(t);
+                b.Fill(t);
+                //studentgrid.Columns[3].DefaultCellStyle.Format = "yyyy-mm-dd";
                 studentgrid.DataSource = t;
             }
 
-            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,telephone,address FROM accounts where accounttype='parent'", func.connection))
+            using (MySqlDataAdapter c = new MySqlDataAdapter("SELECT fullname,email,username,telephone,address FROM accounts where accounttype='parent'", func.connection))
             {
                 DataTable t = new DataTable();
-                a.Fill(t);
+                c.Fill(t);
                 parentgrid.DataSource = t;
             }
         }
@@ -89,11 +90,12 @@ namespace Kindergarten
         //student
         private void button4_Click(object sender, EventArgs e)
         {
-            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,birthdate,classid,level FROM accounts where accounttype='student'", func.connection))
+            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,birthdate,classid,level,parent_username FROM accounts where accounttype='student'", func.connection))
             {
 
                 DataTable t = new DataTable();
                 a.Fill(t);
+                //studentgrid.Columns[4].DefaultCellStyle.Format = "yyyy-mm-dd";
                 studentgrid.DataSource = t;
             }
 
@@ -102,22 +104,27 @@ namespace Kindergarten
         private void button3_Click(object sender, EventArgs e)
         {
             MySqlCommand comm = new MySqlCommand("delete from accounts where accounttype='student'", func.connection);
-            // comm.ExecuteNonQuery();
+            comm.ExecuteNonQuery();
             DataTable t = new DataTable();
-            //a.Fill(t);
-            //Object a = teachergrid.Rows[0]["0"];
+            DateTime dt = new DateTime();
             for (int i = 0; i < studentgrid.Rows.Count - 1; i++)
             {
+               // studentgrid.Columns[5].DefaultCellStyle.Format = "yyyy-mm-dd";
+                string tmp;
+                tmp = studentgrid.Rows[i].Cells["birthdate"].Value.ToString();
+                dt = DateTime.Parse(tmp);
+               
 
-                comm.CommandText = "INSERT INTO accounts (accounttype,fullname,email,username,password,birthdate,level,classid) VALUES ('student', '"
+                comm.CommandText = "INSERT INTO accounts (accounttype,fullname,email,username,password,birthdate,level,classid,parent_username) VALUES ('student', '"
                  + studentgrid.Rows[i].Cells["fullname"].Value.ToString() + "','"
                  + studentgrid.Rows[i].Cells["email"].Value.ToString() + "','"
                  + studentgrid.Rows[i].Cells["username"].Value.ToString() + "','12345','"
-                 + studentgrid.Rows[i].Cells["birthdate"].Value + "','"
+                 + String.Format("{0:yyyy-M-dd}", dt) + "','"
                  + studentgrid.Rows[i].Cells["level"].Value + "','"
-                 + studentgrid.Rows[i].Cells["classid"].Value + "');";
-                System.Windows.Forms.MessageBox.Show(comm.CommandText);
-                //   comm.ExecuteNonQuery();
+                 + studentgrid.Rows[i].Cells["classid"].Value + "','"
+                 + studentgrid.Rows[i].Cells["parent_username"].Value.ToString() + "');";
+                //System.Windows.Forms.MessageBox.Show(comm.CommandText);
+                comm.ExecuteNonQuery();
             }
         }
 
@@ -125,7 +132,12 @@ namespace Kindergarten
         //parent
         private void button6_Click(object sender, EventArgs e)
         {
-
+            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,telephone,address FROM accounts where accounttype='parent'", func.connection))
+            {
+                DataTable t = new DataTable();
+                a.Fill(t);
+                parentgrid.DataSource = t;
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
