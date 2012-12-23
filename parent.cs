@@ -26,5 +26,23 @@ namespace Kindergarten
         {
             func.loginForm.Show();
         }
+
+        private void about_Click(object sender, EventArgs e)
+        {
+            func.about(this);
+        }
+
+        private void logout_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.listView1.SelectedItems.Count > 0)
+            {
+                this.tabControl1.SelectedIndex = this.listView1.SelectedItems[0].Index;
+            }
+        }
     }
 }
