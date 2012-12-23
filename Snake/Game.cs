@@ -567,8 +567,8 @@ namespace Snake
 		public void Finish_Game()
 		{
 
-            MySqlCommand comm = new MySqlCommand("insert into gameresults(gameid,stdid,recorddate,score) values ('"
-                + Program.arg[1] + "','" + Program.arg[0] + "',now(),'" + point + "');", Kindergarten.func.connection);
+            MySqlCommand comm = new MySqlCommand("insert into gameresults(gameid,stdid,recorddate,score,level) values ('"
+                + Program.arg[1] + "','" + Program.arg[0] + "',now(),'" + point + "','"+game_level+"');", Kindergarten.func.connection);
             comm.ExecuteNonQuery();     
             //System.Windows.Forms.MessageBox.Show(comm.CommandText);
 
@@ -584,8 +584,8 @@ namespace Snake
 		public void Game_Over()
 		{
 
-            MySqlCommand comm = new MySqlCommand("insert into gameresults(gameid,stdid,recorddate,score) values ("
-                + Program.arg[1] + ",'" + Program.arg[0] + "',NOW(),'" + point + "');", Kindergarten.func.connection);
+            MySqlCommand comm = new MySqlCommand("insert into gameresults(gameid,stdid,recorddate,score,level) values ("
+                + Program.arg[1] + ",'" + Program.arg[0] + "',NOW(),'" + point + "','" + game_level + "');", Kindergarten.func.connection);
             comm.ExecuteNonQuery();
             //System.Windows.Forms.MessageBox.Show(comm.CommandText);
             

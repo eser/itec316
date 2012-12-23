@@ -34,7 +34,7 @@ namespace Kindergarten
         {
             this.listView1.Items[0].Selected = true;
             label1.Text = "Last 3 Scores:";
-            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT recorddate,score FROM gameresults where stdid='" 
+            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT recorddate,score,level FROM gameresults where stdid='" 
                 + func.userid + "' and gameid=3 ORDER BY recorddate DESC LIMIT 0 , 3", func.connection))
             {
                 DataTable t = new DataTable();
@@ -91,7 +91,7 @@ namespace Kindergarten
         private void button4_Click(object sender, EventArgs e)
         {
             label1.Text = "Last 3 Scores:";
-            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT recorddate,score FROM gameresults where stdid='"
+            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT recorddate,score,level FROM gameresults where stdid='"
                 + func.userid + "' and gameid=3 ORDER BY recorddate DESC LIMIT 0 , 3", func.connection))
             {
 
@@ -104,7 +104,7 @@ namespace Kindergarten
         private void button5_Click(object sender, EventArgs e)
         {
             label1.Text = "All Scores:";
-            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT recorddate,score FROM gameresults where stdid='"
+            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT recorddate,score,level FROM gameresults where stdid='"
     + func.userid + "' and gameid=3 ORDER BY recorddate DESC", func.connection))
             {
                 DataTable t = new DataTable();

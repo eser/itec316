@@ -43,6 +43,7 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tabControl1 = new Kindergarten.CustomTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -57,7 +58,7 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -173,6 +174,15 @@
             this.tabPage1.Text = "Educational Game";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(296, 38);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(335, 182);
+            this.label3.TabIndex = 10;
+            this.label3.Text = resources.GetString("label3.Text");
+            // 
             // button6
             // 
             this.button6.Location = new System.Drawing.Point(53, 296);
@@ -232,6 +242,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Controls.Add(this.button5);
             this.tabPage2.Controls.Add(this.button4);
             this.tabPage2.Controls.Add(this.label1);
@@ -334,15 +345,14 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label3
+            // label4
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(296, 38);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(174, 78);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Minimum solutions for hanoi Towers\r\n\r\nLevel 3: 7\r\nLevel 4: 15\r\nLevel 5: 31\r\nLevel" +
-    " 6: 63";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(296, 38);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(257, 182);
+            this.label4.TabIndex = 11;
+            this.label4.Text = resources.GetString("label4.Text");
             // 
             // student
             // 
@@ -398,5 +408,6 @@
         private System.Windows.Forms.DataGridView hanoigrid;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }

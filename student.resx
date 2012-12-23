@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAa
-        IAAAAk1TRnQBSQFMAgEBAgEAASABAgEgAQIBMAEAATABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAHA
+        IAAAAk1TRnQBSQFMAgEBAgEAASgBAgEoAQIBMAEAATABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAHA
         AwABMAMAAQEBAAEgBgABkCIAAzUBWAMeASsDCAEL/wD/APkAAf8DAAH/AwAB/wNZAewDWwHIA1IBpgNH
         AYMDPAFmAy4BRwMeASsDDAEQAwQBBf8A/wDOAAMZASMDAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/
         AwAB/wMAAf8DAAH/AwAB/wMAAf8DUgH0A1oB5ANbAdYDWAHLA1UBtANTAaoDTAGSA04BlANHAYIDQQFy
@@ -295,4 +295,36 @@
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>484, 17</value>
   </metadata>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Minimum solutions for Towers Of Hanoi
+
+Level 3: 7
+Level 4: 15
+Level 5: 31
+Level 6: 63
+
+Rules:
+
+    * Only one disk may be moved at a time.
+    * Each move consists of taking the upper disk from one of the rods 
+       and sliding it onto another rod, on top of the other disks that may 
+       already be present on that rod.
+    * No disk may be placed on top of a smaller disk.</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Max Points for Snake Game
+
+Level 1: 50
+Level 2: 50
+Level 3: 50
+Level 4: 50
+Level 5: 50
+Level 6: 50
+
+Rules:
+
+    * Move Snake with direction keys and catch foods
+    * Don't hit the walls.
+    * Don't bite yourself!..</value>
+  </data>
 </root>
