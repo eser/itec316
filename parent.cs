@@ -8,12 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.IO;
 
 namespace Kindergarten
 {
     public partial class parent : Form
     {
         public static string stdid;
+        public static string stdid2;
+
         public parent()
         {
             InitializeComponent();
@@ -32,12 +35,14 @@ namespace Kindergarten
         private void parent_Load(object sender, EventArgs e)
         {
             label1.Text = "Last 3 Scores:";
+            comboBox3.Items.Add("");
 
             MySqlCommand cmd = new MySqlCommand("SELECT username FROM accounts where accounttype='student' and parent_username='" + func.userid + "'", func.connection);
             MySqlDataReader dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
             {
                comboBox1.Items.Add(dataReader["username"]);
+               comboBox3.Items.Add(dataReader["username"]);
             }
 
             dataReader.Close();
@@ -182,6 +187,32 @@ namespace Kindergarten
             }
             comboBox2.SelectedIndex = 0;
             dataReader.Close();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            // func.mciSendString("open \"" + Environment.CurrentDirectory + "\\" + func.userid + ".wav\" Alias playsound", "", 0, 0);
+            // func.mciSendString("play playsound", "", 0, 0);
+            // func.mciSendString("close playsound", "", 0, 0);
+            func.PlaySound(Environment.CurrentDirectory + "\\" + stdid2 + ".wav", IntPtr.Zero, func.SoundFlags.SND_FILENAME | func.SoundFlags.SND_ASYNC);
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox3.SelectedIndex == 0)
+            {
+                return;
+            }
+
+            stdid2 = comboBox3.SelectedItem.ToString();
+            if (File.Exists(Environment.CurrentDirectory + "\\" + stdid2 + ".wav"))
+            {
+                button8.Enabled = true;
+            }
+            else
+            {
+                button8.Enabled = false;
+            }
         }
 
 

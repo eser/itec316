@@ -74,12 +74,17 @@ namespace Kindergarten
         {
             func.mciSendString("open new Type waveaudio Alias recsound", "", 0, 0);
             func.mciSendString("record recsound", "", 0, 0);
+            this.button1.Enabled = false;
+            this.button2.Enabled = true;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            func.mciSendString("save recsound c:\\itec316\\result.wav", "", 0, 0);
+            func.mciSendString("save recsound \"" + Environment.CurrentDirectory + "\\" + func.userid + ".wav\"", "", 0, 0);
             func.mciSendString("close recsound ", "", 0, 0);
+            this.button1.Enabled = true;
+            this.button2.Enabled = false;
+            MessageBox.Show("Recording completed");
         }
 
         private void button3_Click(object sender, EventArgs e)
