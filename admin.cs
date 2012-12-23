@@ -17,14 +17,14 @@ namespace Kindergarten
         {
             this.listView1.Items[0].Selected = true;
 
-            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,classid,level FROM accounts where accounttype='teacher'", func.connection))
+            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,classid,level,password FROM accounts where accounttype='teacher'", func.connection))
             {
                 DataTable t = new DataTable();
                 a.Fill(t);
                 teachergrid.DataSource = t;
             }
 
-            using (MySqlDataAdapter b = new MySqlDataAdapter("SELECT fullname,email,username,birthdate,classid,level,parent_username FROM accounts where accounttype='student'", func.connection))
+            using (MySqlDataAdapter b = new MySqlDataAdapter("SELECT fullname,email,username,birthdate,classid,level,parent_username,password FROM accounts where accounttype='student'", func.connection))
             {
                 DataTable t = new DataTable();
                 b.Fill(t);
@@ -32,7 +32,7 @@ namespace Kindergarten
                 studentgrid.DataSource = t;
             }
 
-            using (MySqlDataAdapter c = new MySqlDataAdapter("SELECT fullname,email,username,telephone,address FROM accounts where accounttype='parent'", func.connection))
+            using (MySqlDataAdapter c = new MySqlDataAdapter("SELECT fullname,email,username,telephone,address,password FROM accounts where accounttype='parent'", func.connection))
             {
                 DataTable t = new DataTable();
                 c.Fill(t);
@@ -53,7 +53,7 @@ namespace Kindergarten
         //Teacher
         private void button1_Click(object sender, EventArgs e)
         {
-            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,classid,level FROM accounts where accounttype='teacher'", func.connection))
+            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,classid,level,password FROM accounts where accounttype='teacher'", func.connection))
             {
                 DataTable t = new DataTable();
                 a.Fill(t);
@@ -74,7 +74,8 @@ namespace Kindergarten
                 comm.CommandText = "INSERT INTO accounts (accounttype, fullname, email, username, password, level,classid) VALUES ('teacher', '"
                  + teachergrid.Rows[i].Cells["fullname"].Value.ToString() + "','"
                  + teachergrid.Rows[i].Cells["email"].Value.ToString() + "','"
-                 + teachergrid.Rows[i].Cells["username"].Value.ToString() + "','12345','"
+                 + teachergrid.Rows[i].Cells["username"].Value.ToString() + "','"
+                 + teachergrid.Rows[i].Cells["password"].Value.ToString() + "','"
                  + teachergrid.Rows[i].Cells["level"].Value + "','"
                  + teachergrid.Rows[i].Cells["classid"].Value + "');";
                 comm.ExecuteNonQuery();
@@ -90,7 +91,7 @@ namespace Kindergarten
         //student
         private void button4_Click(object sender, EventArgs e)
         {
-            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,birthdate,classid,level,parent_username FROM accounts where accounttype='student'", func.connection))
+            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,birthdate,classid,level,parent_username,password FROM accounts where accounttype='student'", func.connection))
             {
 
                 DataTable t = new DataTable();
@@ -118,7 +119,8 @@ namespace Kindergarten
                 comm.CommandText = "INSERT INTO accounts (accounttype,fullname,email,username,password,birthdate,level,classid,parent_username) VALUES ('student', '"
                  + studentgrid.Rows[i].Cells["fullname"].Value.ToString() + "','"
                  + studentgrid.Rows[i].Cells["email"].Value.ToString() + "','"
-                 + studentgrid.Rows[i].Cells["username"].Value.ToString() + "','12345','"
+                 + studentgrid.Rows[i].Cells["username"].Value.ToString() + "','"
+                 + studentgrid.Rows[i].Cells["password"].Value.ToString() + "','"
                  + String.Format("{0:yyyy-M-dd}", dt) + "','"
                  + studentgrid.Rows[i].Cells["level"].Value + "','"
                  + studentgrid.Rows[i].Cells["classid"].Value + "','"
@@ -132,7 +134,7 @@ namespace Kindergarten
         //parent
         private void button6_Click(object sender, EventArgs e)
         {
-            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,telephone,address FROM accounts where accounttype='parent'", func.connection))
+            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,password,telephone,address FROM accounts where accounttype='parent'", func.connection))
             {
                 DataTable t = new DataTable();
                 a.Fill(t);
@@ -142,7 +144,21 @@ namespace Kindergarten
 
         private void button5_Click(object sender, EventArgs e)
         {
-
+            MySqlCommand comm = new MySqlCommand("delete from accounts where accounttype='parent'", func.connection);
+            comm.ExecuteNonQuery();
+            DataTable t = new DataTable();
+            for (int i = 0; i < parentgrid.Rows.Count - 1; i++)
+            {
+                comm.CommandText = "INSERT INTO accounts (accounttype,fullname,email,username,password,telephone,address) VALUES ('parent', '"
+                 + parentgrid.Rows[i].Cells["fullname"].Value.ToString() + "','"
+                 + parentgrid.Rows[i].Cells["email"].Value.ToString() + "','"
+                 + parentgrid.Rows[i].Cells["username"].Value.ToString() + "','"
+                 + parentgrid.Rows[i].Cells["password"].Value.ToString() + "','"
+                 + parentgrid.Rows[i].Cells["telephone"].Value.ToString() + "','"
+                 + parentgrid.Rows[i].Cells["address"].Value.ToString() + "');";
+                //System.Windows.Forms.MessageBox.Show(comm.CommandText);
+                comm.ExecuteNonQuery();
+            }
         }
 
         private void admin_Shown(object sender, EventArgs e)
