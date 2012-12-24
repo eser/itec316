@@ -71,6 +71,8 @@ namespace Kindergarten
             {
                 comboBox2.Items.Add(dataReader1["messageid"]);
             }
+            if (comboBox2.Items.Count == 0)
+                comboBox2.Items.Add("Empty");
             comboBox2.SelectedIndex = 0;
             dataReader1.Close();
         }
@@ -155,36 +157,46 @@ namespace Kindergarten
             {
                 comboBox2.Items.Add(dataReader["messageid"]);
             }
+            if (comboBox2.Items.Count == 0)
+                comboBox2.Items.Add("Empty");
             comboBox2.SelectedIndex = 0;
             dataReader.Close();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT senderaccount,text,messagedate FROM messages where messageid='" 
-                + comboBox2.SelectedItem + "'", func.connection);
-            //richTextBox1.Text = cmd.CommandText;
-            MySqlDataReader dataReader = cmd.ExecuteReader();
-            dataReader.Read();          
+            if (!comboBox2.Text.Equals("Empty"))
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT senderaccount,text,messagedate FROM messages where messageid='"
+                    + comboBox2.SelectedItem + "'", func.connection);
+                //richTextBox1.Text = cmd.CommandText;
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                dataReader.Read();
                 richTextBox1.Text = "From: " + dataReader["senderaccount"].ToString() +
-                    "\nDate: " + dataReader["messagedate"].ToString() + 
-                    "\nMessage: \n" + dataReader["text"].ToString() ;
-            dataReader.Close();
+                    "\nDate: " + dataReader["messagedate"].ToString() +
+                    "\nMessage: \n" + dataReader["text"].ToString();
+                dataReader.Close();
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            MySqlCommand cmd1 = new MySqlCommand("DELETE FROM messages where messageid='"
-                + comboBox2.SelectedItem + "'", func.connection);
-            cmd1.ExecuteNonQuery();
-            comboBox2.Items.Clear();
-
+            if (!comboBox2.Text.Equals("Empty"))
+            {
+                MySqlCommand cmd1 = new MySqlCommand("DELETE FROM messages where messageid='"
+                    + comboBox2.SelectedItem + "'", func.connection);
+                cmd1.ExecuteNonQuery();
+                comboBox2.Items.Clear();
+                richTextBox1.Clear();
+            }
             MySqlCommand cmd = new MySqlCommand("SELECT messageid FROM messages where receiveraccount='" + func.userid + "'", func.connection);
             MySqlDataReader dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
             {
                 comboBox2.Items.Add(dataReader["messageid"]);
             }
+            if (comboBox2.Items.Count == 0)
+                comboBox2.Items.Add("Empty");
             comboBox2.SelectedIndex = 0;
             dataReader.Close();
         }
