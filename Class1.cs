@@ -45,7 +45,7 @@ namespace Kindergarten
 
         public static void conn()
         {
-            func.connection = new MySqlConnection("SERVER=localhost;DATABASE=kindergarten;UID=root;PASSWORD=paddole;");
+            func.connection = new MySqlConnection("SERVER=127.0.0.1;DATABASE=kindergarten;UID=root;PASSWORD=;");
             func.connection.Open();
 
         }

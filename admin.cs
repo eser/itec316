@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 
 namespace Kindergarten
@@ -11,6 +12,24 @@ namespace Kindergarten
         public admin()
         {
             InitializeComponent();
+        }
+
+        private void getclasses()
+        {
+            classes.Items.Clear();
+            //classes.View = View.List;
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM classes", func.connection);
+            MySqlDataReader dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                //class1.Add((int)dataReader["classid"], (string)dataReader["name"]);
+                //classes.Items.Add(dataReader["name"]);
+                ListViewItem item = new ListViewItem();
+                item.Tag = dataReader["classid"];
+                item.Text = dataReader["name"].ToString();
+                classes.Items.Add(item);
+            }
+            dataReader.Close();
         }
 
         private void admin_Load(object sender, EventArgs e)
@@ -47,6 +66,7 @@ namespace Kindergarten
                 c.Fill(t);
                 parentgrid.DataSource = t;
             }
+            getclasses();
         }
 
         private void about_Click(object sender, EventArgs e)
@@ -197,6 +217,27 @@ namespace Kindergarten
             + richTextBox1.Text.ToString() + "',now())", func.connection);
             cmd.ExecuteNonQuery();
             System.Windows.Forms.MessageBox.Show("Message Send.");
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(textBox1.Text))
+            {
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO classes (name) values ('" + textBox1.Text + "')",func.connection);
+                cmd.ExecuteNonQuery();
+                getclasses();
+            }
+            
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(classes.FocusedItem.Tag.ToString()))
+            {
+                MySqlCommand cmd = new MySqlCommand("DELETE FROM classes WHERE classid=" + classes.FocusedItem.Tag + "", func.connection);
+                cmd.ExecuteNonQuery();
+                getclasses();
+            }
         }
     }
 }

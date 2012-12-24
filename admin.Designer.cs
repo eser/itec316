@@ -58,6 +58,11 @@
             this.button6 = new System.Windows.Forms.Button();
             this.parentgrid = new System.Windows.Forms.DataGridView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.classes = new System.Windows.Forms.ListView();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.button7 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -72,6 +77,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.studentgrid)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.parentgrid)).BeginInit();
+            this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -316,6 +322,11 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.classes);
+            this.tabPage4.Controls.Add(this.button9);
+            this.tabPage4.Controls.Add(this.button8);
+            this.tabPage4.Controls.Add(this.label2);
+            this.tabPage4.Controls.Add(this.textBox1);
             this.tabPage4.Location = new System.Drawing.Point(4, 25);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
@@ -323,6 +334,52 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Classes";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // classes
+            // 
+            this.classes.Location = new System.Drawing.Point(6, 6);
+            this.classes.MultiSelect = false;
+            this.classes.Name = "classes";
+            this.classes.Size = new System.Drawing.Size(182, 362);
+            this.classes.TabIndex = 6;
+            this.classes.UseCompatibleStateImageBehavior = false;
+            this.classes.View = System.Windows.Forms.View.List;
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(113, 374);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(75, 23);
+            this.button9.TabIndex = 4;
+            this.button9.Text = "Delete Class";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(219, 48);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.TabIndex = 3;
+            this.button8.Text = "Add Class";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(194, 6);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(66, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Class Name:";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(194, 22);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 1;
             // 
             // tabPage5
             // 
@@ -402,6 +459,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.studentgrid)).EndInit();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.parentgrid)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             this.ResumeLayout(false);
@@ -437,5 +496,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ListView classes;
     }
 }
