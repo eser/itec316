@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using MySql.Data.MySqlClient;
-
+using System.IO;
 
 namespace Kindergarten
 {
@@ -49,6 +49,14 @@ namespace Kindergarten
                 a.Fill(t);
                 hanoigrid.DataSource = t;
             }
+            if (File.Exists(Environment.CurrentDirectory + "\\" + func.userid + ".wav"))
+            {
+                button9.Enabled = true;
+            }
+            else
+            {
+                button9.Enabled = false;
+            }
 
         }
 
@@ -85,6 +93,14 @@ namespace Kindergarten
             this.button1.Enabled = true;
             this.button2.Enabled = false;
             MessageBox.Show("Recording completed");
+            if (File.Exists(Environment.CurrentDirectory + "\\" + func.userid + ".wav"))
+            {
+                button9.Enabled = true;
+            }
+            else
+            {
+                button9.Enabled = false;
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -155,6 +171,11 @@ namespace Kindergarten
         private void hanoigrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            func.PlaySound(Environment.CurrentDirectory + "\\" + func.userid + ".wav", IntPtr.Zero, func.SoundFlags.SND_FILENAME | func.SoundFlags.SND_ASYNC);
         }
 
 
