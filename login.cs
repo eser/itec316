@@ -64,6 +64,7 @@ namespace Kindergarten
             {
                 case "teacher":
                     func.adminForm = new admin();
+                    
                     func.adminForm.Show();
                     break;
                 case "parent":

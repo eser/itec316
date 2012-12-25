@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 
 
+
 namespace Kindergarten
 {
     public partial class admin : Form
@@ -13,6 +14,7 @@ namespace Kindergarten
         {
             InitializeComponent();
         }
+
 
         private void getclasses()
         {
@@ -32,8 +34,75 @@ namespace Kindergarten
             dataReader.Close();
         }
 
+        private void fillteachergrid()
+        {
+            teachergrid.DataSource = null;
+            teachergrid.Rows.Clear();
+            teachergrid.Columns.Clear();
+            //teachergrid.Refresh();
+            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT accountid,fullname,email,username,classid,level,password FROM accounts where accounttype='teacher'", func.connection))
+            {
+                DataTable t = new DataTable();
+                a.Fill(t);
+                teachergrid.DataSource = t;
+                teachergrid.Columns[0].Visible = false;
+                teachergrid.Columns[6].Visible = false;
+            }
+            DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
+            teachergrid.Columns.Add(btn);
+            btn.HeaderText = "Password";
+            btn.Text = "Change";
+            btn.Name = "btn";
+            btn.UseColumnTextForButtonValue = true;
+        }
+
+        private void fillstudentgrid()
+        {
+            studentgrid.DataSource = null;
+            studentgrid.Rows.Clear();
+            studentgrid.Columns.Clear();
+            using (MySqlDataAdapter b = new MySqlDataAdapter("SELECT accountid,fullname,email,username,birthdate,classid,level,parent_username,password FROM accounts where accounttype='student'", func.connection))
+            {
+                DataTable t = new DataTable();
+                b.Fill(t);
+                studentgrid.DataSource = t;
+                studentgrid.Columns[0].Visible = false;
+                studentgrid.Columns[8].Visible = false;
+            }
+            DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
+            studentgrid.Columns.Add(btn);
+            btn.HeaderText = "Password";
+            btn.Text = "Change";
+            btn.Name = "btn1";
+            btn.UseColumnTextForButtonValue = true;
+        }
+
+        private void fillparentgrid()
+        {
+            parentgrid.DataSource = null;
+            parentgrid.Rows.Clear();
+            parentgrid.Columns.Clear();
+
+            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT accountid,fullname,email,username,telephone,address,password FROM accounts where accounttype='parent'", func.connection))
+            {
+                DataTable t = new DataTable();
+                a.Fill(t);
+                parentgrid.DataSource = t;
+                parentgrid.Columns[0].Visible = false;
+                parentgrid.Columns[6].Visible = false;
+            }
+            DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
+            parentgrid.Columns.Add(btn);
+            btn.HeaderText = "Password";
+            btn.Text = "Change";
+            btn.Name = "btn";
+            btn.UseColumnTextForButtonValue = true;
+        }
+
         private void admin_Load(object sender, EventArgs e)
         {
+
+
             this.listView1.Items[0].Selected = true;
 
             MySqlCommand cmd = new MySqlCommand("SELECT username FROM accounts where accounttype='parent'", func.connection);
@@ -45,27 +114,10 @@ namespace Kindergarten
             dataReader.Close();
             comboBox1.SelectedIndex = 0;
 
-            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,classid,level,password FROM accounts where accounttype='teacher'", func.connection))
-            {
-                DataTable t = new DataTable();
-                a.Fill(t);
-                teachergrid.DataSource = t;
-            }
+            fillteachergrid();
+            fillstudentgrid();
+            fillparentgrid();        
 
-            using (MySqlDataAdapter b = new MySqlDataAdapter("SELECT fullname,email,username,birthdate,classid,level,parent_username,password FROM accounts where accounttype='student'", func.connection))
-            {
-                DataTable t = new DataTable();
-                b.Fill(t);
-                //studentgrid.Columns[3].DefaultCellStyle.Format = "yyyy-mm-dd";
-                studentgrid.DataSource = t;
-            }
-
-            using (MySqlDataAdapter c = new MySqlDataAdapter("SELECT fullname,email,username,telephone,address,password FROM accounts where accounttype='parent'", func.connection))
-            {
-                DataTable t = new DataTable();
-                c.Fill(t);
-                parentgrid.DataSource = t;
-            }
             getclasses();
         }
 
@@ -82,12 +134,7 @@ namespace Kindergarten
         //Teacher
         private void button1_Click(object sender, EventArgs e)
         {
-            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,classid,level,password FROM accounts where accounttype='teacher'", func.connection))
-            {
-                DataTable t = new DataTable();
-                a.Fill(t);
-                teachergrid.DataSource = t;
-            }
+            fillteachergrid();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -99,8 +146,11 @@ namespace Kindergarten
             //Object a = teachergrid.Rows[0]["0"];
             for (int i = 0; i < teachergrid.Rows.Count - 1; i++)
             {
+                if (string.IsNullOrEmpty(teachergrid.Rows[i].Cells["password"].Value.ToString()))
+                    teachergrid.Rows[i].Cells["password"].Value = "12345";
 
-                comm.CommandText = "INSERT INTO accounts (accounttype, fullname, email, username, password, level,classid) VALUES ('teacher', '"
+                comm.CommandText = "INSERT INTO accounts (accounttype,accountid, fullname, email, username, password, level,classid) VALUES ('teacher', '"
+                 + teachergrid.Rows[i].Cells["accountid"].Value + "','"
                  + teachergrid.Rows[i].Cells["fullname"].Value.ToString() + "','"
                  + teachergrid.Rows[i].Cells["email"].Value.ToString() + "','"
                  + teachergrid.Rows[i].Cells["username"].Value.ToString() + "','"
@@ -111,24 +161,11 @@ namespace Kindergarten
             }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
 
         //student
         private void button4_Click(object sender, EventArgs e)
         {
-            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,birthdate,classid,level,parent_username,password FROM accounts where accounttype='student'", func.connection))
-            {
-
-                DataTable t = new DataTable();
-                a.Fill(t);
-                //studentgrid.Columns[4].DefaultCellStyle.Format = "yyyy-mm-dd";
-                studentgrid.DataSource = t;
-            }
-
+            fillstudentgrid();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -143,9 +180,10 @@ namespace Kindergarten
                 string tmp;
                 tmp = studentgrid.Rows[i].Cells["birthdate"].Value.ToString();
                 dt = DateTime.Parse(tmp);
-               
-
-                comm.CommandText = "INSERT INTO accounts (accounttype,fullname,email,username,password,birthdate,level,classid,parent_username) VALUES ('student', '"
+                if (string.IsNullOrEmpty(studentgrid.Rows[i].Cells["password"].Value.ToString()))
+                    studentgrid.Rows[i].Cells["password"].Value = "12345";
+                comm.CommandText = "INSERT INTO accounts (accounttype,accountid,fullname,email,username,password,birthdate,level,classid,parent_username) VALUES ('student', '"
+                 + studentgrid.Rows[i].Cells["accountid"].Value + "','"
                  + studentgrid.Rows[i].Cells["fullname"].Value.ToString() + "','"
                  + studentgrid.Rows[i].Cells["email"].Value.ToString() + "','"
                  + studentgrid.Rows[i].Cells["username"].Value.ToString() + "','"
@@ -163,12 +201,7 @@ namespace Kindergarten
         //parent
         private void button6_Click(object sender, EventArgs e)
         {
-            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT fullname,email,username,password,telephone,address FROM accounts where accounttype='parent'", func.connection))
-            {
-                DataTable t = new DataTable();
-                a.Fill(t);
-                parentgrid.DataSource = t;
-            }
+            fillparentgrid();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -178,7 +211,10 @@ namespace Kindergarten
             DataTable t = new DataTable();
             for (int i = 0; i < parentgrid.Rows.Count - 1; i++)
             {
-                comm.CommandText = "INSERT INTO accounts (accounttype,fullname,email,username,password,telephone,address) VALUES ('parent', '"
+                if (string.IsNullOrEmpty(parentgrid.Rows[i].Cells["password"].Value.ToString()))
+                    parentgrid.Rows[i].Cells["password"].Value = "12345";
+                comm.CommandText = "INSERT INTO accounts (accounttype,accountid,fullname,email,username,password,telephone,address) VALUES ('parent', '"
+                 + parentgrid.Rows[i].Cells["accountid"].Value.ToString() + "','"                 
                  + parentgrid.Rows[i].Cells["fullname"].Value.ToString() + "','"
                  + parentgrid.Rows[i].Cells["email"].Value.ToString() + "','"
                  + parentgrid.Rows[i].Cells["username"].Value.ToString() + "','"
@@ -206,17 +242,22 @@ namespace Kindergarten
             {
                 this.tabControl1.SelectedIndex = this.listView1.SelectedItems[0].Index;
             }
+            fillteachergrid();
+            fillstudentgrid();
+            fillparentgrid();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            
-            MySqlCommand cmd = new MySqlCommand("INSERT INTO messages (senderaccount, receiveraccount, text, messagedate) VALUES ('"
-            + func.userid + "','"
-            + comboBox1.SelectedItem.ToString() + "','"
-            + richTextBox1.Text.ToString() + "',now())", func.connection);
-            cmd.ExecuteNonQuery();
-            System.Windows.Forms.MessageBox.Show("Message Send.");
+            if (!comboBox1.Text.Equals("Empty") && !string.IsNullOrEmpty(comboBox1.Text) && comboBox1.Items.Count > 0)
+            {
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO messages (senderaccount, receiveraccount, text, messagedate) VALUES ('"
+                + func.userid + "','"
+                + comboBox1.SelectedItem.ToString() + "','"
+                + richTextBox1.Text.ToString() + "',now())", func.connection);
+                cmd.ExecuteNonQuery();
+                System.Windows.Forms.MessageBox.Show("Message Send.");
+            }
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -237,6 +278,42 @@ namespace Kindergarten
                 MySqlCommand cmd = new MySqlCommand("DELETE FROM classes WHERE classid=" + classes.FocusedItem.Tag + "", func.connection);
                 cmd.ExecuteNonQuery();
                 getclasses();
+            }
+        }
+
+        private void teachergrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 7 && e.RowIndex != teachergrid.Rows.Count -1 )
+            {
+                //System.Windows.Forms.MessageBox.Show(e.ColumnIndex + " Column " + e.RowIndex + " Row " +
+                //"for this row Account id: " + teachergrid.Rows[e.RowIndex].Cells["accountid"].Value.ToString());
+                changepass chng = new changepass(teachergrid.Rows[e.RowIndex].Cells["accountid"].Value);
+                chng.ShowDialog();
+                fillteachergrid();
+            }
+        }
+
+        private void studentgrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 9 && e.RowIndex != studentgrid.Rows.Count - 1)
+            {
+                //System.Windows.Forms.MessageBox.Show(e.ColumnIndex + " Column " + e.RowIndex + " Row " +
+                //"for this row Account id: " + studentgrid.Rows[e.RowIndex].Cells["accountid"].Value.ToString());
+                changepass chng = new changepass(studentgrid.Rows[e.RowIndex].Cells["accountid"].Value);
+                chng.ShowDialog();
+                fillstudentgrid();
+            }
+        }
+
+        private void parentgrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 7 && e.RowIndex != parentgrid.Rows.Count - 1)
+            {
+                //System.Windows.Forms.MessageBox.Show(e.ColumnIndex + " Column " + e.RowIndex + " Row " +
+                //"for this row Account id: " + studentgrid.Rows[e.RowIndex].Cells["accountid"].Value.ToString());
+                changepass chng = new changepass(parentgrid.Rows[e.RowIndex].Cells["accountid"].Value);
+                chng.ShowDialog();
+                fillparentgrid();
             }
         }
     }

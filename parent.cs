@@ -36,7 +36,6 @@ namespace Kindergarten
         {
             label1.Text = "Last 3 Scores:";
             comboBox3.Items.Add("");
-
             MySqlCommand cmd = new MySqlCommand("SELECT username FROM accounts where accounttype='student' and parent_username='" + func.userid + "'", func.connection);
             MySqlDataReader dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
@@ -46,8 +45,13 @@ namespace Kindergarten
             }
 
             dataReader.Close();
-            comboBox1.SelectedIndex = 0;
-            stdid = comboBox1.SelectedItem.ToString();
+            if (comboBox1.Items.Count != 0)
+            {
+                comboBox1.SelectedIndex = 0;
+                stdid = comboBox1.SelectedItem.ToString();
+            }
+            else
+                stdid = null;
             label1.Text = "Last 3 Scores for " + stdid + ":";
             using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT recorddate,score,level FROM gameresults where stdid='"
                 + stdid + "' and gameid=3 ORDER BY recorddate DESC LIMIT 0 , 3", func.connection))
@@ -65,16 +69,20 @@ namespace Kindergarten
                 hanoigrid.DataSource = t;
             }
 
+            comboBox2.Items.Clear();
             MySqlCommand cmd1 = new MySqlCommand("SELECT messageid FROM messages where receiveraccount='" + func.userid + "'",func.connection);
             MySqlDataReader dataReader1 = cmd1.ExecuteReader();
             while (dataReader1.Read())
             {
                 comboBox2.Items.Add(dataReader1["messageid"]);
+                //System.Windows.Forms.MessageBox.Show(dataReader1["messageid"].ToString());
             }
+            dataReader1.Close();
+            //System.Windows.Forms.MessageBox.Show(comboBox2.Items.Count.ToString());
             if (comboBox2.Items.Count == 0)
                 comboBox2.Items.Add("Empty");
             comboBox2.SelectedIndex = 0;
-            dataReader1.Close();
+
         }
 
         private void about_Click(object sender, EventArgs e)
@@ -98,53 +106,65 @@ namespace Kindergarten
         //Hanoi
         private void button6_Click(object sender, EventArgs e)
         {
-            stdid = comboBox1.SelectedItem.ToString();
-            label2.Text = "All Scores for "+stdid+":";
-            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT recorddate,score,level FROM gameresults where stdid='"
-                + stdid + "' and gameid=1 ORDER BY recorddate DESC", func.connection))
+            if (!comboBox1.Text.Equals("Empty") && !string.IsNullOrEmpty(comboBox1.Text) && comboBox1.Items.Count > 0)
             {
-                DataTable t = new DataTable();
-                a.Fill(t);
-                hanoigrid.DataSource = t;
+                stdid = comboBox1.SelectedItem.ToString();
+                label2.Text = "All Scores for " + stdid + ":";
+                using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT recorddate,score,level FROM gameresults where stdid='"
+                    + stdid + "' and gameid=1 ORDER BY recorddate DESC", func.connection))
+                {
+                    DataTable t = new DataTable();
+                    a.Fill(t);
+                    hanoigrid.DataSource = t;
+                }
             }
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            stdid = comboBox1.SelectedItem.ToString();
-            label2.Text = "Last 3 Scores for "+stdid+":";
-            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT recorddate,score,level FROM gameresults where stdid='"
-              + stdid + "' and gameid=1 ORDER BY recorddate DESC LIMIT 0 , 3", func.connection))
+            if (!comboBox1.Text.Equals("Empty") && !string.IsNullOrEmpty(comboBox1.Text) && comboBox1.Items.Count > 0)
             {
-                DataTable t = new DataTable();
-                a.Fill(t);
-                hanoigrid.DataSource = t;
+                stdid = comboBox1.SelectedItem.ToString();
+                label2.Text = "Last 3 Scores for " + stdid + ":";
+                using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT recorddate,score,level FROM gameresults where stdid='"
+                  + stdid + "' and gameid=1 ORDER BY recorddate DESC LIMIT 0 , 3", func.connection))
+                {
+                    DataTable t = new DataTable();
+                    a.Fill(t);
+                    hanoigrid.DataSource = t;
+                }
             }
         }
         //Snake
         private void button1_Click(object sender, EventArgs e)
         {
-            stdid = comboBox1.SelectedItem.ToString();
-            label1.Text = "All Scores for " + stdid + ":";
-            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT recorddate,score,level FROM gameresults where stdid='"
-                + stdid + "' and gameid=3 ORDER BY recorddate DESC", func.connection))
+            if (!comboBox1.Text.Equals("Empty") && !string.IsNullOrEmpty(comboBox1.Text) && comboBox1.Items.Count > 0)
             {
-                DataTable t = new DataTable();
-                a.Fill(t);
-                snakegrid.DataSource = t;
+                stdid = comboBox1.SelectedItem.ToString();
+                label1.Text = "All Scores for " + stdid + ":";
+                using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT recorddate,score,level FROM gameresults where stdid='"
+                    + stdid + "' and gameid=3 ORDER BY recorddate DESC", func.connection))
+                {
+                    DataTable t = new DataTable();
+                    a.Fill(t);
+                    snakegrid.DataSource = t;
+                }
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            stdid = comboBox1.SelectedItem.ToString();
-            label1.Text = "Last 3 Scores for " + stdid + ":";
-            using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT recorddate,score,level FROM gameresults where stdid='"
-                + stdid + "' and gameid=3 ORDER BY recorddate DESC LIMIT 0 , 3", func.connection))
+            if (!comboBox1.Text.Equals("Empty") && !string.IsNullOrEmpty(comboBox1.Text) && comboBox1.Items.Count > 0)
             {
-                DataTable t = new DataTable();
-                a.Fill(t);
-                snakegrid.DataSource = t;
+                stdid = comboBox1.SelectedItem.ToString();
+                label1.Text = "Last 3 Scores for " + stdid + ":";
+                using (MySqlDataAdapter a = new MySqlDataAdapter("SELECT recorddate,score,level FROM gameresults where stdid='"
+                    + stdid + "' and gameid=3 ORDER BY recorddate DESC LIMIT 0 , 3", func.connection))
+                {
+                    DataTable t = new DataTable();
+                    a.Fill(t);
+                    snakegrid.DataSource = t;
+                }
             }
         }
 
@@ -165,16 +185,19 @@ namespace Kindergarten
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (!comboBox2.Text.Equals("Empty"))
+            if (!comboBox2.Text.Equals("Empty") && !string.IsNullOrEmpty(comboBox2.Text) && comboBox2.Items.Count > 0)
             {
                 MySqlCommand cmd = new MySqlCommand("SELECT senderaccount,text,messagedate FROM messages where messageid='"
                     + comboBox2.SelectedItem + "'", func.connection);
-                //richTextBox1.Text = cmd.CommandText;
+                //richTextBox1.Text = "test";
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 dataReader.Read();
-                richTextBox1.Text = "From: " + dataReader["senderaccount"].ToString() +
-                    "\nDate: " + dataReader["messagedate"].ToString() +
-                    "\nMessage: \n" + dataReader["text"].ToString();
+                if (!string.IsNullOrEmpty((dataReader["senderaccount"]).ToString()))
+                {
+                    richTextBox1.Text = "From: " + dataReader["senderaccount"].ToString() +
+                        "\nDate: " + dataReader["messagedate"].ToString() +
+                        "\nMessage: \n" + dataReader["text"].ToString();
+                }
                 dataReader.Close();
             }
         }

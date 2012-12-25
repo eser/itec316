@@ -68,6 +68,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -79,6 +80,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.parentgrid)).BeginInit();
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // listView1
@@ -224,6 +226,7 @@
             this.teachergrid.Name = "teachergrid";
             this.teachergrid.Size = new System.Drawing.Size(641, 374);
             this.teachergrid.TabIndex = 0;
+            this.teachergrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.teachergrid_CellContentClick);
             // 
             // tabPage2
             // 
@@ -271,7 +274,7 @@
             this.studentgrid.Name = "studentgrid";
             this.studentgrid.Size = new System.Drawing.Size(816, 373);
             this.studentgrid.TabIndex = 3;
-            this.studentgrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.studentgrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.studentgrid_CellContentClick);
             // 
             // tabPage3
             // 
@@ -319,9 +322,12 @@
             this.parentgrid.Name = "parentgrid";
             this.parentgrid.Size = new System.Drawing.Size(641, 373);
             this.parentgrid.TabIndex = 3;
+            this.parentgrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.parentgrid_CellContentClick);
             // 
             // tabPage4
             // 
+            this.tabPage4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.tabPage4.Controls.Add(this.pictureBox1);
             this.tabPage4.Controls.Add(this.classes);
             this.tabPage4.Controls.Add(this.button9);
             this.tabPage4.Controls.Add(this.button8);
@@ -435,6 +441,16 @@
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(316, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(494, 397);
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            // 
             // admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -463,6 +479,7 @@
             this.tabPage4.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -501,5 +518,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ListView classes;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
